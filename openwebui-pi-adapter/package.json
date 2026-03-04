@@ -2,7 +2,7 @@
 	"name": "openwebui-pi-adapter",
 	"version": "0.1.0",
 	"type": "module",
-	"description": "Open WebUI to pi-agent adapter - exposes OpenAI Chat Completions API",
+	"description": "Open WebUI to pi-agent adapter - exposes OpenAI Chat Completions API via pi RPC mode",
 	"main": "dist/index.js",
 	"scripts": {
 		"start": "tsx src/index.ts",
@@ -10,7 +10,6 @@
 		"reinstall": "rm -rf node_modules package-lock.json && npm install"
 	},
 	"dependencies": {
-		"@mariozechner/pi-coding-agent": "^0.55.4",
 		"express": "^4.21.0"
 	},
 	"devDependencies": {
