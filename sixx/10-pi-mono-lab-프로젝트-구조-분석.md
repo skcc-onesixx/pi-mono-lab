@@ -25,16 +25,42 @@ pi-agent(pi-mono) fork 프로젝트의 소스 구조 분석 문서입니다.
 | **mom** | `@mariozechner/pi-mom` | Slack 봇 (pi 코딩 에이전트 위임) |
 | **pods** | `@mariozechner/pi-pods` | vLLM GPU 팟 관리 CLI |
 
+### 2.1 패키지가 왜 분리되어 있는가
+
+각 패키지는 **한 가지 역할만** 담당하고, 조합해서 사용합니다.
+
+| 패키지 | 역할 | 비유 |
+|--------|------|------|
+| **ai** | LLM API 호출 | 전화기 (OpenAI, Anthropic, Ollama 등에 연결) |
+| **agent** | 대화 + 도구 실행 루프 | 대화 흐름을 관리하는 두뇌 |
+| **tui** | 터미널 화면 그리기 | 터미널 UI |
+| **coding-agent** | 터미널용 pi 앱 | ai + agent + tui를 합친 **터미널 앱** |
+| **mom** | Slack용 pi 앱 | ai + agent를 합친 **Slack 봇** (tui 불필요) |
+| **web-ui** | 웹 채팅 UI | 웹용 채팅 컴포넌트 |
+| **pods** | vLLM GPU 관리 | 별도 CLI 도구 |
+
+**분리 이유**:
+- **재사용**: ai는 다른 LLM 프로젝트에서도, agent는 Slack/웹 등 다른 인터페이스에서도 사용 가능
+- **역할 분리**: ai는 "어떤 LLM에 어떻게 요청할지", agent는 "메시지 → LLM → 도구 실행 루프", tui는 "화면에 어떻게 그릴지"만 담당
+- **테스트/배포**: 각 패키지를 독립적으로 테스트·배포 가능
+
+**실제 사용**: `pi` 명령으로 실행하는 것은 **coding-agent**입니다. ai, agent, tui는 그 안에서 조합된 부품입니다.
+
 ---
 
 ## 3. 의존성 흐름
 
 ```
-coding-agent (CLI 진입점)
+coding-agent (터미널 앱 = pi 명령)
     ├── agent (에이전트 루프, 도구 실행)
     │   └── ai (LLM 스트리밍, 프로바이더)
     ├── tui (터미널 UI)
     └── web-ui (웹 UI, 선택적)
+
+mom (Slack 봇)
+    ├── agent
+    │   └── ai
+    └── (tui 없음 - Slack이 UI 담당)
 ```
 
 ---
