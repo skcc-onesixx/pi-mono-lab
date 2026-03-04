@@ -15,6 +15,7 @@ import * as readline from "node:readline";
 import express, { type Request, type Response } from "express";
 
 const PORT = parseInt(process.env.PORT ?? "3001", 10);
+const HOST = process.env.HOST ?? "0.0.0.0";
 const MODEL_ID = process.env.PI_ADAPTER_MODEL ?? "pi-agent";
 const PI_CLI = process.env.PI_CLI_PATH ?? "pi";
 
@@ -193,9 +194,9 @@ app.get("/health", (_req: Request, res: Response) => {
 	res.json({ status: "ok" });
 });
 
-app.listen(PORT, () => {
-	console.log(`Open WebUI ↔ pi-agent Adapter (RPC) listening on http://localhost:${PORT}`);
-	console.log(`Configure Open WebUI: Base URL = http://localhost:${PORT}/v1`);
+app.listen(PORT, HOST, () => {
+	console.log(`Open WebUI ↔ pi-agent Adapter (RPC) listening on http://${HOST}:${PORT}`);
+	console.log(`Configure Open WebUI: Base URL = http://<host>:${PORT}/v1`);
 	console.log(`Model ID: ${MODEL_ID}`);
 	console.log(`Pi CLI: ${PI_CLI}`);
 });
