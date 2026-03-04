@@ -9,7 +9,7 @@
 		"dev": "tsx watch src/index.ts"
 	},
 	"dependencies": {
-		"@mariozechner/pi-coding-agent": "file:../packages/coding-agent",
+		"@mariozechner/pi-coding-agent": "^0.55.4",
 		"express": "^4.21.0"
 	},
 	"devDependencies": {

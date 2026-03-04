@@ -6,10 +6,9 @@ OpenAI Chat Completions API를 노출하여 Open WebUI가 pi-agent에 연결할 
 ## 사전 요구사항
 
 - Node.js 20+
-- pi-mono-lab 패키지 빌드 완료: 프로젝트 루트에서 `npm run build` 실행 후 `packages/coding-agent/dist/` 생성 확인
 - LLM API 키 설정 (Ollama는 로컬이면 불필요)
 
-> 빌드가 안 되면: `npm install -g @mariozechner/pi-coding-agent` 후 adapter의 package.json에서 `"@mariozechner/pi-coding-agent": "file:../packages/coding-agent"`를 `"@mariozechner/pi-coding-agent": "^0.55.4"`로 변경
+> **로컬 pi 소스 사용 시**: `"@mariozechner/pi-coding-agent": "file:../packages/coding-agent"`로 변경 후, 프로젝트 루트에서 `npm run build` 실행해 `packages/coding-agent/dist/` 생성 필요
 
 ## 설치
 
