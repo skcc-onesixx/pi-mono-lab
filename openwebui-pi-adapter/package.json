@@ -6,7 +6,8 @@
 	"main": "dist/index.js",
 	"scripts": {
 		"start": "tsx src/index.ts",
-		"dev": "tsx watch src/index.ts"
+		"dev": "tsx watch src/index.ts",
+		"reinstall": "rm -rf node_modules package-lock.json && npm install"
 	},
 	"dependencies": {
 		"@mariozechner/pi-coding-agent": "^0.55.4",

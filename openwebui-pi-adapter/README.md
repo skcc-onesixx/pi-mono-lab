@@ -17,6 +17,12 @@ cd openwebui-pi-adapter
 npm install
 ```
 
+이전에 `file:../packages/coding-agent`로 설치했다면, 의존성 정리 후 재설치:
+
+```bash
+npm run reinstall
+```
+
 ## 실행
 
 ```bash
